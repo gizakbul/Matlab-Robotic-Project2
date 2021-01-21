@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<robot name="prr">
+
+  <material name="red">
+    <color rgba="1 0.2 0 0.8" />
+  </material>
+  <material name="green">
+    <color rgba="0.4 1 0.4 0.8" />
+  </material>
+  <material name="blue">
+    <color rgba="0.4 0.2 0.6 0.8" />
+  </material>
+  <material name="purple">
+    <color rgba="1 0.4 1 0.8" />
+  </material>
+  <material name="yellow">
+    <color rgba="0.7 0.5 1 0.8" />
+  </material>
+
+  <link name="base_link" >
+    <visual>
+      <geometry>
+        <box size="1.5 1.5 0.5" />
+      </geometry>
+      <origin xyz="1.5 0 -2.5" />
+      <material name="purple" />
+    </visual>
+
+    <collision>
+      <geometry>
+        <box size="0.1 0.1 1" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="link1">
+    <visual>
+      <geometry>
+        <box size="1 1 3" />
+      </geometry>
+      <origin xyz="0.5 0 -1" />
+      <material name="blue" />
+    </visual>
+  
+    <collision>
+      <geometry>
+        <box size="0.1 0.1 1" />
+      </geometry>
+    </collision>
+
+  </link>
+
+  <link name="link2">
+    <visual>
+      <geometry>
+        <box size="2 0.5 0.5" />
+      </geometry>
+      <origin xyz="0.5 0 0" />
+      <material name="red" />
+    </visual>
+
+    <collision>
+      <geometry>
+        <box size="0.1 0.1 1" />
+      </geometry>
+    </collision>
+
+  </link>
+
+  <link name="link3">
+    <visual>
+      <geometry>
+        <box size="2 0.2 0.2" />
+      </geometry>
+      <origin xyz="0.5 0 0" />
+      <material name="green" />
+    </visual>
+
+    <collision>
+      <geometry>
+        <box size="0.1 0.1 1" />
+      </geometry>
+    </collision>
+
+  </link>
+
+  <link name="end">
+    <visual>
+      <geometry>
+        <cylinder radius = "0.2" length="0.2" />
+      </geometry>
+      <material name="yellow" />
+    </visual>
+
+    <collision>
+      <geometry>
+        <box size="0.1 0.1 1" />
+      </geometry>
+    </collision>
+
+  </link>
+
+  <joint name="q1" type="prismatic">
+    <parent link="base_link" />
+    <child link="link1" />
+    <limit effort="30" velocity="0.1" lower="-5" upper="5" />
+    <origin xyz="1 0 0" />
+    <axis xyz="0 0 1" />
+  </joint>
+  
+  <joint name="q2" type="revolute">
+    <parent link="link1" />
+    <child link="link2" />
+    <limit effort="30" velocity="0.1" lower="-5" upper="5" />
+    <origin xyz="1 0 0" />
+    <axis xyz="0 0 1" />
+  </joint>
+
+  <joint name="q3" type="revolute">
+    <parent link="link2" />
+    <child link="link3" />
+    <limit effort="30" velocity="0.1" lower="-5" upper="5" />
+    <origin xyz="1 0 0" />
+    <axis xyz="0 0 1" />
+  </joint>
+  
+  <joint name="notajoint" type="fixed">
+    <parent link="link3" />
+    <child link="end" />
+    <origin xyz="1.5 0 0" />
+  </joint>
+  
+</robot>
